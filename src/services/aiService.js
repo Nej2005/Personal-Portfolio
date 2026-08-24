@@ -1,0 +1,203 @@
+/**
+ * Service for communicating with server-side AI endpoints and speech synthesis
+ */
+
+export async function sendChatMessage(messages, activeQuestion) {
+  try {
+    const res = await fetch('/api/chat', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        messages,
+        message: activeQuestion
+      }),
+    });
+
+    if (!res.ok) {
+      const errData = await res.json().catch(() => ({}));
+      throw new Error(errData.error || `Server responded with status ${res.status}`);
+    }
+
+    return await res.json();
+  } catch (error) {
+    console.error('aiService sendChatMessage error:', error);
+    // Offline/Fallback grounded answers if endpoint fails or network drops
+    return {
+      reply: getOfflineFallbackResponse(activeQuestion),
+      model: 'local-fallback',
+      navLinks: [
+        { label: 'View Projects', target: '#projects' },
+        { label: 'View Skills', target: '#skills' }
+      ]
+    };
+  }
+}
+
+// Robust fallback matcher for local offline preview
+function getOfflineFallbackResponse(prompt) {
+  const p = (prompt || '').toLowerCase();
+  if (p.includes('who are you') || p.includes('your name') || p.includes('nini')) {
+    return "Hi! I'm **Nini**, Jenny's AI portfolio assistant. I can help you learn all about her projects, backend development skills, academic achievements, and certifications.";
+  }
+  if (p.includes('project') || p.includes('built') || p.includes('work') || p.includes('system')) {
+    return "Jenny has developed several practical systems:\n\n1. **Student Examination Management System** (React, Node.js, MySQL) — An automated web platform for administering and evaluating student exams.\n2. **IT Helpdesk System** (React, Laravel, MySQL) — A ticketing platform for logging and dispatching hardware/software support.\n3. **E-Commerce Website** (HTML/CSS, JavaScript, PHP, MySQL) — A dynamic shopping portal with cart and checkout workflows.\n4. **AI Portfolio Assistant** — An interactive assistant powered by Gemini API.";
+  }
+  if (p.includes('technology') || p.includes('skill') || p.includes('language') || p.includes('tool')) {
+    return "Jenny specializes in backend development and full-stack technologies:\n\n- **Programming Languages**: JavaScript, PHP, Java, SQL, Python, C#\n- **Developer Tools**: VS Code, Git & GitHub, MySQL, Figma, Postman, Docker\n\nShe focuses on writing clean, maintainable code and solving real-world challenges.";
+  }
+  if (p.includes('github') || p.includes('git') || p.includes('repo') || p.includes('account')) {
+    return "Jenny maintains two active GitHub profiles:\n\n1. **Personal GitHub** (@Nej2005): Personal builds, AI assistant applications, and capstone systems.\n2. **School / Academic GitHub** (@jennyH25): University coursework and academic team repositories.\n\nYou can explore both from the Hero section or Contact section below!";
+  }
+  if (p.includes('certification') || p.includes('certificate')) {
+    return "Jenny holds verified credentials and workshop completions including:\n\n- **Alibaba Cloud Academy: Vibe Coding Pro (AI-Driven Coding)** (2025–2028)\n- **SHE++ Masterclass on Alibaba Cloud System** (PhilDev & Alibaba Cloud, 2025)\n- **iSITE: The Future of the Digital Era** (2025)\n- **SHE++ Workshop Series: Leadership, Design Thinking & Strategic Foresight** (PhilDev & Wells Fargo, 2025)\n- **Packetworx & KadaKareer: IoT & LoRaWAN Workshop Series (Sessions 1–3)** (2026)";
+  }
+  if (p.includes('hire') || p.includes('why') || p.includes('contact')) {
+    return "Jenny is a dedicated 4th-year BSIT student at Pamantasan ng Lungsod ng Pasig (President's Lister) working toward becoming a backend developer. She has hands-on experience across databases, APIs, and modern frontends.\n\nYou can reach her via email at **jennypatanag@gmail.com** or phone at **+63 9175045559** / **+63 9603829786**.";
+  }
+  return "Hi! I'm Nini, Jenny's AI assistant. She is a 4th-year BSIT student at Pamantasan ng Lungsod ng Pasig passionate about backend systems and building functional software. Feel free to ask about her projects, technical stack, or certifications!";
+}
+
+/**
+ * Text to speech playback helper with a soft, gentle feminine voice
+ */
+let currentUtterance = null;
+let cachedVoices = [];
+
+// Pre-cache voices when available
+if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+  cachedVoices = window.speechSynthesis.getVoices() || [];
+  window.speechSynthesis.onvoiceschanged = () => {
+    cachedVoices = window.speechSynthesis.getVoices() || [];
+  };
+}
+
+const femaleVoiceKeywords = [
+  'zira',
+  'jenny',
+  'aria',
+  'samantha',
+  'victoria',
+  'karen',
+  'susan',
+  'hazel',
+  'catherine',
+  'clara',
+  'sonia',
+  'natasha',
+  'libby',
+  'neerja',
+  'fiona',
+  'tessa',
+  'stephanie',
+  'moira',
+  'female',
+  'woman'
+];
+
+const maleVoiceKeywords = [
+  'david',
+  'mark',
+  'george',
+  'richard',
+  'guy',
+  'stefan',
+  'paul',
+  'male',
+  'man',
+  'boy',
+  'james',
+  'steve',
+  'daniel',
+  'oliver',
+  'brian',
+  'christopher',
+  'eric'
+];
+
+function getSoftFemaleVoice() {
+  if (typeof window === 'undefined' || !('speechSynthesis' in window)) return null;
+  const voices = (cachedVoices.length > 0 ? cachedVoices : window.speechSynthesis.getVoices()) || [];
+  if (voices.length === 0) return null;
+
+  // 1. First priority: Top named natural soft female voices (Zira, Jenny, Aria, Samantha, etc.)
+  const topFemaleVoice = voices.find(v => {
+    const name = (v.name || '').toLowerCase();
+    const isMale = maleVoiceKeywords.some(m => name.includes(m));
+    if (isMale) return false;
+    return femaleVoiceKeywords.some(f => name.includes(f));
+  });
+
+  if (topFemaleVoice) return topFemaleVoice;
+
+  // 2. Second priority: Any English voice that is explicitly NOT male
+  const nonMaleEnglishVoice = voices.find(v => {
+    const name = (v.name || '').toLowerCase();
+    const lang = (v.lang || '').toLowerCase();
+    const isEnglish = lang.startsWith('en') || lang.startsWith('fil');
+    const isMale = maleVoiceKeywords.some(m => name.includes(m));
+    return isEnglish && !isMale;
+  });
+
+  if (nonMaleEnglishVoice) return nonMaleEnglishVoice;
+
+  // 3. Fallback to any non-male voice
+  return voices.find(v => {
+    const name = (v.name || '').toLowerCase();
+    return !maleVoiceKeywords.some(m => name.includes(m));
+  }) || voices[0] || null;
+}
+
+export function speakText(text, onStart, onEnd, onError) {
+  if (typeof window === 'undefined' || !('speechSynthesis' in window)) {
+    if (onError) onError(new Error('Speech synthesis is not supported on this browser.'));
+    return;
+  }
+
+  // Stop any active audio
+  stopSpeaking();
+
+  // Strip markdown symbols and formatting for clean natural speech
+  const cleanText = text
+    .replace(/[#*`_~[\]()]/g, '')
+    .replace(/\n+/g, '. ')
+    .replace(/\s+/g, ' ')
+    .trim();
+
+  const utterance = new SpeechSynthesisUtterance(cleanText);
+  
+  // Soft, feminine vocal cadence
+  utterance.rate = 0.92;  // Gentle, calm pacing
+  utterance.pitch = 1.22; // Soft, friendly, natural feminine pitch
+  utterance.lang = 'en-US';
+
+  const softVoice = getSoftFemaleVoice();
+  if (softVoice) {
+    utterance.voice = softVoice;
+  }
+
+  utterance.onstart = () => {
+    if (onStart) onStart();
+  };
+
+  utterance.onend = () => {
+    currentUtterance = null;
+    if (onEnd) onEnd();
+  };
+
+  utterance.onerror = (err) => {
+    currentUtterance = null;
+    if (onError) onError(err);
+  };
+
+  currentUtterance = utterance;
+  window.speechSynthesis.speak(utterance);
+}
+
+export function stopSpeaking() {
+  if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+    window.speechSynthesis.cancel();
+    currentUtterance = null;
+  }
+}

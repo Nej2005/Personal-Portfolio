@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='%23111111'/><text x='50' y='60' fill='%23ffffff' font-size='38' font-weight='600' font-family='sans-serif' text-anchor='middle'>JH</text></svg>" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jenny Hernandez | Portfolio</title>
+  <meta name="description"
+    content="Personal portfolio of Jenny Hernandez, an Information Technology student passionate about building practical web systems, database architectures, and modern AI integrations." />
+  <meta name="keywords"
+    content="Information Technology, IT Student, Web Developer, React, Vite, Tailwind CSS, Gemini API, Portfolio" />
+  <meta name="author" content="Jenny Hernandez" />
+
+  <!-- Open Graph / Social Meta -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Jenny Hernandez | IT Portfolio" />
+  <meta property="og:description"
+    content="Information Technology student portfolio featuring systems builds, practical technical skills, certifications, and an interactive Gemini AI Assistant." />
+
+  <!-- Google Fonts: Inter & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Instant Theme Loader Script -->
+  <script>
+    (function () {
+      try {
+        const saved = localStorage.getItem('portfolio_theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (saved === 'dark' || (!saved && prefersDark)) {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      } catch (e) { }
+    })();
+  </script>
+</head>
+
+<body class="bg-white dark:bg-[#0D0D0D] text-portfolio-primary dark:text-[#EDEDED] antialiased selection:bg-neutral-200 selection:text-neutral-900 dark:selection:bg-neutral-800 dark:selection:text-white transition-colors duration-300">
+  <div id="root"></div>
+  <script type="module" src="/src/main.jsx"></script>
+</body>
+
+</html>
