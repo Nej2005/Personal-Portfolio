@@ -76,7 +76,7 @@ export const portfolioData = {
       githubUrl: "https://github.com/Nej2005/Personal-Portfolio.git",
       githubAccount: "Personal GitHub",
       accountType: "personal",
-      demoUrl: "#",
+      demoUrl: "https://personal-portfolio-hernandez.vercel.app/",
       featured: true
     },
     {
