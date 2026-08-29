@@ -48,7 +48,7 @@ export default function App() {
       if (!footerEl) return;
       const rect = footerEl.getBoundingClientRect();
       const windowHeight = window.innerHeight;
-      
+
       if (rect.top < windowHeight) {
         const visibleFooterHeight = windowHeight - rect.top;
         setBottomOffset(visibleFooterHeight + 24);
@@ -69,7 +69,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-white dark:bg-[#0D0D0D] text-portfolio-primary dark:text-[#EDEDED] flex flex-col relative selection:bg-neutral-200 dark:selection:bg-neutral-800 transition-colors duration-300">
-      
+
       {/* Dark / Light Mode Toggle Button (Top Right) */}
       <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
 
@@ -90,14 +90,14 @@ export default function App() {
       <Footer />
 
       {/* Floating Popup AI Chatbox */}
-      <AIAssistant 
-        isOpen={isAIOpen} 
-        onClose={() => setIsAIOpen(false)} 
+      <AIAssistant
+        isOpen={isAIOpen}
+        onClose={() => setIsAIOpen(false)}
         bottomOffset={bottomOffset}
       />
 
       {/* Floating Circular AI Assistant Trigger Button (Bottom Right) */}
-      <div 
+      <div
         className="fixed right-3.5 sm:right-6 z-40 transition-[bottom] duration-150 ease-out"
         style={{ bottom: `${bottomOffset}px` }}
       >

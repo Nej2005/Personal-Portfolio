@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { Bot, User, Copy, Check, ExternalLink } from 'lucide-react';
 import VoiceButton from './VoiceButton';
 
-export default function ChatMessage({ 
-  message, 
-  onSpeak, 
-  isSpeaking, 
+export default function ChatMessage({
+  message,
+  onSpeak,
+  isSpeaking,
   voiceEnabled,
-  onNavigate 
+  onNavigate
 }) {
   const [copied, setCopied] = useState(false);
   const isUser = message.role === 'user';
@@ -23,8 +23,8 @@ export default function ChatMessage({
       if (line.startsWith('- ') || line.startsWith('* ')) {
         return (
           <li key={idx} className="ml-4 list-disc my-1">
-            <span dangerouslySetInnerHTML={{ 
-              __html: line.substring(2).replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') 
+            <span dangerouslySetInnerHTML={{
+              __html: line.substring(2).replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
             }} />
           </li>
         );
@@ -32,8 +32,8 @@ export default function ChatMessage({
       if (/^\d+\.\s/.test(line)) {
         return (
           <div key={idx} className="my-1.5 font-medium">
-            <span dangerouslySetInnerHTML={{ 
-              __html: line.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') 
+            <span dangerouslySetInnerHTML={{
+              __html: line.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
             }} />
           </div>
         );
@@ -43,8 +43,8 @@ export default function ChatMessage({
       }
       return (
         <p key={idx} className="my-1">
-          <span dangerouslySetInnerHTML={{ 
-            __html: line.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') 
+          <span dangerouslySetInnerHTML={{
+            __html: line.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
           }} />
         </p>
       );
@@ -66,14 +66,25 @@ export default function ChatMessage({
 
   return (
     <div className="flex items-start gap-2.5 my-3.5">
-      {/* AI Icon */}
-      <div className="w-7 h-7 rounded-full bg-[#111111] dark:bg-white text-white dark:text-[#111111] flex items-center justify-center flex-shrink-0 mt-0.5">
-        <Bot className="w-4 h-4" />
+      {/* AI Avatar Icon (Light & Dark mode HOVER PNGs) */}
+      <div className="w-7 h-7 rounded-full bg-[#F7F7F5] dark:bg-[#222222] border border-[#E8E8E3] dark:border-[#333333] overflow-hidden flex items-center justify-center flex-shrink-0 mt-0.5 p-0.5 shadow-xs">
+        {/* Light Mode PNG */}
+        <img
+          src="/images/chatbot-hover.png"
+          alt="Nini AI"
+          className="w-full h-full object-contain dark:hidden"
+        />
+        {/* Dark Mode PNG */}
+        <img
+          src="/images/chatbot-hover-dark.png"
+          alt="Nini AI"
+          className="w-full h-full object-contain hidden dark:block"
+        />
       </div>
 
       {/* Message Box */}
       <div className="flex-1 max-w-[90%] bg-white dark:bg-[#1C1C1C] border border-[#E8E8E3] dark:border-[#2C2C2C] rounded-2xl rounded-tl-sm p-3.5 text-xs text-[#222222] dark:text-[#EDEDED] shadow-subtle">
-        
+
         {/* Author Label */}
         <div className="text-[10px] font-bold tracking-wider text-[#888888] dark:text-[#777777] uppercase mb-1.5 flex items-center justify-between">
           <div className="flex items-center gap-1.5">

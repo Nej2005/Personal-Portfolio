@@ -1,26 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 export default function RobotAvatar({ className = "w-8 h-8", hasOnlineDot = true }) {
-  const [isHovered, setIsHovered] = useState(false);
-
   return (
-    <div 
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      className="relative inline-flex items-center justify-center flex-shrink-0 cursor-pointer"
-    >
-      <div className={`rounded-full bg-[#F7F7F5] dark:bg-[#222222] border border-[#E8E8E3] dark:border-[#333333] overflow-hidden flex items-center justify-center shadow-xs p-1 ${className}`}>
+    <div className="relative inline-flex items-center justify-center flex-shrink-0 cursor-pointer">
+      <div className={`rounded-full bg-[#F7F7F5] dark:bg-[#222222] border border-[#E8E8E3] dark:border-[#333333] overflow-hidden flex items-center justify-center shadow-xs p-0.5 ${className}`}>
         {/* Light Mode Avatar */}
         <img
-          src={isHovered ? "/images/chatbot-hover.png" : "/images/chatbot-initial.png"}
+          src="/images/chatbot-hover.png"
           alt="Jenny AI Avatar"
-          className="w-full h-full object-contain transition-all duration-200 dark:hidden"
+          className="w-full h-full object-contain dark:hidden"
         />
         {/* Dark Mode Avatar (White Artwork) */}
         <img
-          src={isHovered ? "/images/chatbot-hover-dark.png" : "/images/chatbot-initial-dark.png"}
+          src="/images/chatbot-hover-dark.png"
           alt="Jenny AI Avatar"
-          className="w-full h-full object-contain transition-all duration-200 hidden dark:block"
+          className="w-full h-full object-contain hidden dark:block"
         />
       </div>
       {hasOnlineDot && (
