@@ -34,7 +34,6 @@ export default function CertificateModal({ certificate, onClose }) {
         className="bg-white dark:bg-[#141414] rounded-xl max-w-3xl w-full max-h-[92vh] border border-[#E8E8E3] dark:border-[#2C2C2C] shadow-2xl overflow-hidden animate-scaleUp flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Modal Header */}
         <div className="p-3.5 sm:p-5 border-b border-[#E8E8E3] dark:border-[#262626] flex items-center justify-between">
           <div className="flex items-center gap-2.5 sm:gap-3 min-w-0 pr-2">
             <div className="w-8 h-8 rounded-full bg-[#F7F7F3] dark:bg-[#222222] border border-[#E8E8E3] dark:border-[#333333] flex items-center justify-center text-[#111111] dark:text-white flex-shrink-0">
@@ -59,7 +58,6 @@ export default function CertificateModal({ certificate, onClose }) {
           </button>
         </div>
 
-        {/* Modal Body: Document Preview with Swiper controls */}
         <div className="relative p-3 sm:p-6 bg-[#F9F9F6] dark:bg-[#101010] min-h-[220px] max-h-[50vh] sm:max-h-[62vh] overflow-hidden flex flex-col items-center justify-center text-center">
           {currentItem.imagePreview ? (
             <img
@@ -79,7 +77,6 @@ export default function CertificateModal({ certificate, onClose }) {
             </div>
           )}
 
-          {/* Modal Navigation Arrows for Multi-session series */}
           {isMulti && (
             <>
               <button
@@ -97,7 +94,6 @@ export default function CertificateModal({ certificate, onClose }) {
                 <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
               </button>
 
-              {/* Modal Slide Dots */}
               <div className="absolute bottom-2 sm:bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-1.5 sm:gap-2 z-20 bg-black/50 backdrop-blur-sm px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full">
                 {certificate.sessions.map((_, idx) => (
                   <button
@@ -116,7 +112,6 @@ export default function CertificateModal({ certificate, onClose }) {
           )}
         </div>
 
-        {/* Modal Footer */}
         <div className="p-3.5 sm:p-4 border-t border-[#E8E8E3] dark:border-[#262626] bg-white dark:bg-[#141414] flex flex-col sm:flex-row gap-3 items-start sm:items-center justify-between">
           <div className="flex flex-wrap items-center gap-2">
             <span className="text-xs text-[#777777] dark:text-[#888888] font-medium">

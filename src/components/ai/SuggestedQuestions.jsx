@@ -3,7 +3,6 @@ import { ArrowUpRight } from 'lucide-react';
 import { portfolioData } from '../../data/portfolioData';
 
 export default function SuggestedQuestions({ onSelectQuestion }) {
-  // Pick 2 random distinct questions on every refresh / page load
   const randomQuestions = useMemo(() => {
     const pool = portfolioData.suggestedQuestions || [];
     if (pool.length <= 2) return pool;

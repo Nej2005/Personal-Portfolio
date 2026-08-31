@@ -1,6 +1,3 @@
-/**
- * Formats current time for a given timezone
- */
 export function getFormattedLocalTime(timeZone = 'Asia/Manila') {
   try {
     const now = new Date();

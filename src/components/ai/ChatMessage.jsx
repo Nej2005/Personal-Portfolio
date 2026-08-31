@@ -66,15 +66,12 @@ export default function ChatMessage({
 
   return (
     <div className="flex items-start gap-2.5 my-3.5">
-      {/* AI Avatar Icon (Light & Dark mode HOVER PNGs) */}
       <div className="w-7 h-7 rounded-full bg-[#F7F7F5] dark:bg-[#222222] border border-[#E8E8E3] dark:border-[#333333] overflow-hidden flex items-center justify-center flex-shrink-0 mt-0.5 p-0.5 shadow-xs">
-        {/* Light Mode PNG */}
         <img
           src="/images/chatbot-hover.png"
           alt="Nini AI"
           className="w-full h-full object-contain dark:hidden"
         />
-        {/* Dark Mode PNG */}
         <img
           src="/images/chatbot-hover-dark.png"
           alt="Nini AI"
@@ -82,10 +79,7 @@ export default function ChatMessage({
         />
       </div>
 
-      {/* Message Box */}
       <div className="flex-1 max-w-[90%] bg-white dark:bg-[#1C1C1C] border border-[#E8E8E3] dark:border-[#2C2C2C] rounded-2xl rounded-tl-sm p-3.5 text-xs text-[#222222] dark:text-[#EDEDED] shadow-subtle">
-
-        {/* Author Label */}
         <div className="text-[10px] font-bold tracking-wider text-[#888888] dark:text-[#777777] uppercase mb-1.5 flex items-center justify-between">
           <div className="flex items-center gap-1.5">
             <span className="text-[#111111] dark:text-white font-bold">Nini</span>
@@ -96,12 +90,10 @@ export default function ChatMessage({
           )}
         </div>
 
-        {/* Content */}
         <div className="text-xs leading-relaxed text-[#222222] dark:text-[#EDEDED]">
           {renderFormattedContent(message.content)}
         </div>
 
-        {/* Context Navigation Pills */}
         {message.navLinks && message.navLinks.length > 0 && (
           <div className="mt-3 pt-2 border-t border-[#F0F0EB] dark:border-[#282828] flex flex-wrap gap-1.5">
             {message.navLinks.map((nav, i) => (
@@ -117,7 +109,6 @@ export default function ChatMessage({
           </div>
         )}
 
-        {/* Action Controls: Read Aloud & Copy */}
         <div className="mt-2.5 pt-2 border-t border-[#F0F0EB] dark:border-[#282828] flex items-center justify-between">
           <div className="flex items-center gap-2">
             <VoiceButton

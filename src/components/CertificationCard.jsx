@@ -1,11 +1,11 @@
 import React, { useState, useRef } from 'react';
 import { Eye, ChevronLeft, ChevronRight } from 'lucide-react';
+import TiltCard from './TiltCard';
 
 export default function CertificationCard({ cert, onView }) {
   const isMulti = cert.isMultiSession && cert.sessions && cert.sessions.length > 0;
   const [activeIdx, setActiveIdx] = useState(0);
 
-  // Touch gesture support for mobile swiping
   const touchStartX = useRef(0);
   const touchEndX = useRef(0);
 
@@ -56,8 +56,12 @@ export default function CertificationCard({ cert, onView }) {
   };
 
   return (
-    <div className="card-minimal bg-white dark:bg-[#141414] flex flex-col justify-between overflow-hidden group select-none">
-      {/* Certificate Image Swiper Container */}
+    <TiltCard
+      maxTilt={12}
+      scale={1.035}
+      glare={true}
+      className="card-minimal bg-white dark:bg-[#141414] flex flex-col justify-between overflow-hidden group select-none"
+    >
       <div 
         onClick={handleCardClick}
         onTouchStart={handleTouchStart}
@@ -69,29 +73,28 @@ export default function CertificationCard({ cert, onView }) {
           key={currentItem.imagePreview}
           src={currentItem.imagePreview}
           alt={currentItem.title || currentItem.name}
-          className="w-full h-full object-cover object-center transition-all duration-300 group-hover:scale-105 animate-fadeIn"
+          className="w-full h-full object-cover object-center transition-all duration-700 ease-out group-hover:scale-108 animate-fadeIn"
           loading="lazy"
           onError={(e) => {
             e.currentTarget.style.display = 'none';
           }}
         />
 
-        {/* Minimal Number Badge for Multi-Session */}
         {isMulti && (
-          <div className="absolute top-2.5 right-2.5 sm:top-3 sm:right-3 z-10">
-            <span className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-[#111111]/85 dark:bg-white/90 text-white dark:text-[#111111] flex items-center justify-center font-mono font-bold text-[10px] sm:text-xs backdrop-blur-sm shadow-xs">
+          <div className="absolute top-2.5 right-2.5 sm:top-3 sm:right-3 z-10" style={{ transform: 'translateZ(20px)' }}>
+            <span className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-[#111111]/85 dark:bg-white/90 text-white dark:text-[#111111] flex items-center justify-center font-mono font-bold text-[10px] sm:text-xs backdrop-blur-sm shadow-xs transition-transform group-hover:scale-110">
               {activeIdx + 1}
             </span>
           </div>
         )}
 
-        {/* Swiper Arrow Buttons (for multi-session cards) */}
         {isMulti && (
           <>
             <button
               onClick={handlePrev}
               aria-label="Previous certificate"
               className="absolute left-2 top-1/2 -translate-y-1/2 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/90 dark:bg-[#181818]/90 hover:bg-white dark:hover:bg-[#252525] text-[#111111] dark:text-white shadow-md border border-[#E8E8E3] dark:border-[#333333] flex items-center justify-center transition-all duration-200 hover:scale-110 active:scale-95 z-20 opacity-90 sm:opacity-80 hover:opacity-100"
+              style={{ transform: 'translateY(-50%) translateZ(25px)' }}
             >
               <ChevronLeft className="w-4 h-4" />
             </button>
@@ -99,12 +102,12 @@ export default function CertificationCard({ cert, onView }) {
               onClick={handleNext}
               aria-label="Next certificate"
               className="absolute right-2 top-1/2 -translate-y-1/2 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/90 dark:bg-[#181818]/90 hover:bg-white dark:hover:bg-[#252525] text-[#111111] dark:text-white shadow-md border border-[#E8E8E3] dark:border-[#333333] flex items-center justify-center transition-all duration-200 hover:scale-110 active:scale-95 z-20 opacity-90 sm:opacity-80 hover:opacity-100"
+              style={{ transform: 'translateY(-50%) translateZ(25px)' }}
             >
               <ChevronRight className="w-4 h-4" />
             </button>
 
-            {/* Slide Pagination Dots */}
-            <div className="absolute bottom-2 sm:bottom-2.5 left-1/2 -translate-x-1/2 flex items-center gap-1.5 z-20 bg-black/40 backdrop-blur-sm px-2.5 py-1 rounded-full">
+            <div className="absolute bottom-2 sm:bottom-2.5 left-1/2 -translate-x-1/2 flex items-center gap-1.5 z-20 bg-black/40 backdrop-blur-sm px-2.5 py-1 rounded-full" style={{ transform: 'translateX(-50%) translateZ(20px)' }}>
               {cert.sessions.map((_, idx) => (
                 <button
                   key={idx}
@@ -124,24 +127,24 @@ export default function CertificationCard({ cert, onView }) {
           </>
         )}
 
-        {/* Hover overlay hint */}
         {!isMulti && (
           <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 dark:group-hover:bg-white/10 transition-colors flex items-center justify-center">
-            <div className="opacity-0 group-hover:opacity-100 transition-opacity bg-white/95 dark:bg-[#181818]/95 px-3 py-1.5 rounded-full shadow-md text-xs font-semibold text-[#111111] dark:text-white flex items-center gap-1.5 backdrop-blur-sm">
+            <div 
+              className="opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 bg-white/95 dark:bg-[#181818]/95 px-3.5 py-1.5 rounded-full shadow-lg text-xs font-semibold text-[#111111] dark:text-white flex items-center gap-1.5 backdrop-blur-sm"
+              style={{ transform: 'translateZ(30px)' }}
+            >
               <Eye className="w-3.5 h-3.5" />
-              <span>Preview</span>
+              <span>Preview Certificate</span>
             </div>
           </div>
         )}
       </div>
 
-      {/* Card Body */}
-      <div className="p-4 sm:p-6 flex-1 flex flex-col justify-between">
+      <div className="p-4 sm:p-6 flex-1 flex flex-col justify-between" style={{ transform: 'translateZ(10px)' }}>
         <div>
-          {/* Header with Category Badge & Year */}
           <div className="flex items-center justify-between gap-2 mb-2.5 sm:mb-3">
             {cert.badge ? (
-              <span className="text-[10px] sm:text-[11px] font-medium font-mono text-[#555555] dark:text-[#AAAAAA] bg-[#F7F7F3] dark:bg-[#202020] px-2.5 py-0.5 rounded-full border border-[#E8E8E3] dark:border-[#2E2E2E]">
+              <span className="text-[10px] sm:text-[11px] font-medium font-mono text-[#555555] dark:text-[#AAAAAA] bg-[#F7F7F3] dark:bg-[#202020] px-2.5 py-0.5 rounded-full border border-[#E8E8E3] dark:border-[#2E2E2E] group-hover:border-[#111111]/30 dark:group-hover:border-white/30 transition-colors">
                 {cert.badge}
               </span>
             ) : <span />}
@@ -150,31 +153,27 @@ export default function CertificationCard({ cert, onView }) {
             </span>
           </div>
 
-          {/* Main Title */}
-          <h3 className="text-sm sm:text-base font-bold text-[#111111] dark:text-white group-hover:text-black dark:group-hover:text-white leading-snug">
+          <h3 className="text-sm sm:text-base font-bold text-[#111111] dark:text-white group-hover:text-black dark:group-hover:text-white leading-snug transition-colors">
             {cert.name}
           </h3>
 
-          {/* Subtitle / Session title if multi-session */}
           {isMulti ? (
             <p className="text-xs font-semibold text-[#222222] dark:text-[#EDEDED] mt-1 sm:mt-1.5">
               {currentItem.title}
             </p>
           ) : null}
 
-          {/* Issuing Organization */}
           <p className="text-xs text-[#6B6B6B] dark:text-[#999999] mt-1 font-medium">
             {currentItem.issuer || cert.issuer}
           </p>
         </div>
 
-        {/* Footer Action */}
         <div className="pt-3 sm:pt-4 mt-3 sm:mt-4 border-t border-[#F0F0EB] dark:border-[#222222] flex items-center justify-between">
           <button
             onClick={handleCardClick}
-            className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#111111] dark:text-white hover:underline"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#111111] dark:text-white hover:underline group/btn"
           >
-            <Eye className="w-3.5 h-3.5" />
+            <Eye className="w-3.5 h-3.5 transition-transform group-hover/btn:scale-110" />
             <span>View Certificate</span>
           </button>
 
@@ -183,6 +182,6 @@ export default function CertificationCard({ cert, onView }) {
           </span>
         </div>
       </div>
-    </div>
+    </TiltCard>
   );
 }

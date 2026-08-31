@@ -1,7 +1,3 @@
-/**
- * Service for communicating with server-side AI endpoints and speech synthesis
- */
-
 export async function sendChatMessage(messages, activeQuestion) {
   try {
     const res = await fetch('/api/chat', {
@@ -23,7 +19,6 @@ export async function sendChatMessage(messages, activeQuestion) {
     return await res.json();
   } catch (error) {
     console.error('aiService sendChatMessage error:', error);
-    // Offline/Fallback grounded answers if endpoint fails or network drops
     return {
       reply: getOfflineFallbackResponse(activeQuestion),
       model: 'local-fallback',
@@ -35,7 +30,6 @@ export async function sendChatMessage(messages, activeQuestion) {
   }
 }
 
-// Robust fallback matcher for local offline preview
 function getOfflineFallbackResponse(prompt) {
   const p = (prompt || '').toLowerCase();
   if (p.includes('who are you') || p.includes('your name') || p.includes('nini')) {
@@ -59,13 +53,9 @@ function getOfflineFallbackResponse(prompt) {
   return "Hi! I'm Nini, Jenny's AI assistant. She is a 4th-year BSIT student at Pamantasan ng Lungsod ng Pasig passionate about backend systems and building functional software. Feel free to ask about her projects, technical stack, or certifications!";
 }
 
-/**
- * Text to speech playback helper with a soft, gentle feminine voice
- */
 let currentUtterance = null;
 let cachedVoices = [];
 
-// Pre-cache voices when available
 if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
   cachedVoices = window.speechSynthesis.getVoices() || [];
   window.speechSynthesis.onvoiceschanged = () => {
@@ -121,7 +111,6 @@ function getSoftFemaleVoice() {
   const voices = (cachedVoices.length > 0 ? cachedVoices : window.speechSynthesis.getVoices()) || [];
   if (voices.length === 0) return null;
 
-  // 1. First priority: Top named natural soft female voices (Zira, Jenny, Aria, Samantha, etc.)
   const topFemaleVoice = voices.find(v => {
     const name = (v.name || '').toLowerCase();
     const isMale = maleVoiceKeywords.some(m => name.includes(m));
@@ -131,7 +120,6 @@ function getSoftFemaleVoice() {
 
   if (topFemaleVoice) return topFemaleVoice;
 
-  // 2. Second priority: Any English voice that is explicitly NOT male
   const nonMaleEnglishVoice = voices.find(v => {
     const name = (v.name || '').toLowerCase();
     const lang = (v.lang || '').toLowerCase();
@@ -142,7 +130,6 @@ function getSoftFemaleVoice() {
 
   if (nonMaleEnglishVoice) return nonMaleEnglishVoice;
 
-  // 3. Fallback to any non-male voice
   return voices.find(v => {
     const name = (v.name || '').toLowerCase();
     return !maleVoiceKeywords.some(m => name.includes(m));
@@ -155,10 +142,8 @@ export function speakText(text, onStart, onEnd, onError) {
     return;
   }
 
-  // Stop any active audio
   stopSpeaking();
 
-  // Strip markdown symbols and formatting for clean natural speech
   const cleanText = text
     .replace(/[#*`_~[\]()]/g, '')
     .replace(/\n+/g, '. ')
@@ -167,9 +152,8 @@ export function speakText(text, onStart, onEnd, onError) {
 
   const utterance = new SpeechSynthesisUtterance(cleanText);
   
-  // Soft, feminine vocal cadence
-  utterance.rate = 0.92;  // Gentle, calm pacing
-  utterance.pitch = 1.22; // Soft, friendly, natural feminine pitch
+  utterance.rate = 0.92;
+  utterance.pitch = 1.22;
   utterance.lang = 'en-US';
 
   const softVoice = getSoftFemaleVoice();

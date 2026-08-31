@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Menu, X, Bot, FileText, ArrowUpRight } from 'lucide-react';
 import { portfolioData } from '../data/portfolioData';
 
-export default function Navbar({ onOpenAI }) {
+export default function Navbar({ onOpenAI, onOpenResume }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -16,10 +16,10 @@ export default function Navbar({ onOpenAI }) {
 
   const navLinks = [
     { name: 'Home', href: '#home' },
-    { name: 'About Me', href: '#about' },
     { name: 'Projects', href: '#projects' },
-    { name: 'Skills', href: '#skills' },
     { name: 'Certifications', href: '#certifications' },
+    { name: 'Tech Stack', href: '#skills' },
+    { name: 'About Me', href: '#about' },
     { name: 'Contact', href: '#contact' },
   ];
 
@@ -30,8 +30,6 @@ export default function Navbar({ onOpenAI }) {
         : 'bg-white py-5 border-b border-transparent'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-        
-        {/* Left: Initials Logo */}
         <a 
           href="#home" 
           className="flex items-center gap-2 group"
@@ -45,7 +43,6 @@ export default function Navbar({ onOpenAI }) {
           </span>
         </a>
 
-        {/* Right: Desktop Navigation Links */}
         <nav className="hidden md:flex items-center space-x-6 lg:space-x-7" aria-label="Main Navigation">
           {navLinks.map((link) => (
             <a
@@ -57,20 +54,17 @@ export default function Navbar({ onOpenAI }) {
             </a>
           ))}
 
-          {/* Resume Pill */}
-          <a
-            href={portfolioData.personal.resumeUrl || "/Jenny_Hernandez_Resume.pdf"}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold border border-[#D5D5CF] text-[#333333] hover:text-black hover:border-black hover:bg-neutral-50 transition-all shadow-2xs active:scale-95 group"
-            title="View Jenny's Resume in a new tab"
+          <button
+            type="button"
+            onClick={onOpenResume}
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold border border-[#D5D5CF] text-[#333333] hover:text-black hover:border-black hover:bg-neutral-50 transition-all shadow-2xs active:scale-95 group cursor-pointer"
+            title="View Jenny's Resume"
           >
             <FileText className="w-3.5 h-3.5 text-neutral-600" />
             <span>Resume</span>
             <ArrowUpRight className="w-3 h-3 text-neutral-500 opacity-80 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-          </a>
+          </button>
           
-          {/* AI Assistant Nav Pill */}
           <button
             onClick={onOpenAI}
             className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-[#111111] text-white hover:bg-neutral-800 transition-all shadow-sm active:scale-95 cursor-pointer"
@@ -81,7 +75,6 @@ export default function Navbar({ onOpenAI }) {
           </button>
         </nav>
 
-        {/* Mobile Menu Button & Mobile AI Assistant Trigger */}
         <div className="flex md:hidden items-center gap-2">
           <button
             onClick={onOpenAI}
@@ -102,7 +95,6 @@ export default function Navbar({ onOpenAI }) {
         </div>
       </div>
 
-      {/* Mobile Dropdown Menu */}
       {mobileMenuOpen && (
         <div className="md:hidden bg-white border-b border-[#E8E8E3] px-5 pt-3 pb-6 space-y-2 animate-fadeIn">
           {navLinks.map((link) => (
@@ -115,18 +107,20 @@ export default function Navbar({ onOpenAI }) {
               {link.name}
             </a>
           ))}
-          <a
-            href={portfolioData.personal.resumeUrl || "/Jenny_Hernandez_Resume.pdf"}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center justify-between text-base font-semibold text-[#111111] py-2.5 border-t border-neutral-100 mt-2"
+          <button
+            type="button"
+            onClick={() => {
+              setMobileMenuOpen(false);
+              onOpenResume();
+            }}
+            className="w-full flex items-center justify-between text-base font-semibold text-[#111111] py-2.5 border-t border-neutral-100 mt-2 cursor-pointer"
           >
             <div className="flex items-center gap-2">
               <FileText className="w-4 h-4 text-neutral-600" />
               <span>Resume</span>
             </div>
             <ArrowUpRight className="w-4 h-4 text-neutral-500 opacity-80" />
-          </a>
+          </button>
         </div>
       )}
     </header>

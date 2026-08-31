@@ -10,12 +10,11 @@ import { sendChatMessage, speakText, stopSpeaking } from '../../services/aiServi
 
 export default function AIAssistant({ isOpen, onClose, bottomOffset = 24 }) {
   const [messages, setMessages] = useState([]);
-  const [status, setStatus] = useState(null); // 'thinking' | 'generating' | 'speaking' | null
+  const [status, setStatus] = useState(null);
   const [speakingText, setSpeakingText] = useState(null);
   const [showMenu, setShowMenu] = useState(false);
   const messagesEndRef = useRef(null);
 
-  // Dynamic resizable dimensions (default: 380px x 540px)
   const [dimensions, setDimensions] = useState(() => {
     if (typeof window !== 'undefined') {
       const isMobile = window.innerWidth < 640;
@@ -39,8 +38,8 @@ export default function AIAssistant({ isOpen, onClose, bottomOffset = 24 }) {
     };
 
     const handleMove = (currentX, currentY) => {
-      const deltaX = startPosRef.current.x - currentX; // Dragging left increases width
-      const deltaY = startPosRef.current.y - currentY; // Dragging up increases height
+      const deltaX = startPosRef.current.x - currentX;
+      const deltaY = startPosRef.current.y - currentY;
 
       const minWidth = Math.min(300, window.innerWidth - 24);
       const maxWidth = Math.min(750, window.innerWidth - 24);
@@ -189,7 +188,6 @@ export default function AIAssistant({ isOpen, onClose, bottomOffset = 24 }) {
           maxHeight: 'calc(100vh - 100px)',
         }}
       >
-        {/* Top-Left Corner Sleek Draggable Resize Handle */}
         <div
           onMouseDown={(e) => {
             e.preventDefault();
@@ -210,16 +208,12 @@ export default function AIAssistant({ isOpen, onClose, bottomOffset = 24 }) {
         >
           <MoveDiagonal2 className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
           
-          {/* Floating Tooltip on hover */}
           <span className="absolute left-full ml-2 px-1.5 py-0.5 bg-[#111111] dark:bg-white text-white dark:text-[#111111] text-[9px] font-medium rounded whitespace-nowrap opacity-0 group-hover/handle:opacity-100 transition-opacity pointer-events-none shadow-sm hidden sm:inline-block">
             resize
           </span>
         </div>
 
-        {/* Main Chat Modal Container */}
         <div className="w-full h-full bg-white dark:bg-[#141414] rounded-2xl sm:rounded-3xl shadow-2xl border border-[#E8E8E3] dark:border-[#282828] overflow-hidden flex flex-col justify-between">
-          
-          {/* Header */}
           <div className="px-4 sm:px-5 py-3 sm:py-4 border-b border-[#F0F0EB] dark:border-[#222222] flex items-center justify-between bg-white dark:bg-[#141414] relative">
             <div className="flex items-center gap-2.5 sm:gap-3">
               <RobotAvatar className="w-7 h-7 sm:w-8 sm:h-8" hasOnlineDot={true} />
@@ -238,9 +232,7 @@ export default function AIAssistant({ isOpen, onClose, bottomOffset = 24 }) {
               </div>
             </div>
 
-          {/* Header Controls */}
           <div className="flex items-center gap-1 relative">
-            {/* Options Menu Button */}
             <button
               onClick={() => setShowMenu(!showMenu)}
               className="p-1.5 rounded-full text-[#777777] dark:text-[#AAAAAA] hover:text-black dark:hover:text-white hover:bg-[#F2F2EC] dark:hover:bg-[#222222] transition-colors cursor-pointer"
@@ -249,7 +241,6 @@ export default function AIAssistant({ isOpen, onClose, bottomOffset = 24 }) {
               <MoreHorizontal className="w-4 h-4" />
             </button>
 
-            {/* Dropdown Menu */}
             {showMenu && (
               <div className="absolute right-8 top-8 bg-white dark:bg-[#1C1C1C] border border-[#E8E8E3] dark:border-[#333333] shadow-lg rounded-xl py-1 w-36 z-30 animate-fadeIn text-xs">
                 <button
@@ -262,7 +253,6 @@ export default function AIAssistant({ isOpen, onClose, bottomOffset = 24 }) {
               </div>
             )}
 
-            {/* Close Button */}
             <button
               onClick={handleClose}
               className="p-1.5 rounded-full text-[#777777] dark:text-[#AAAAAA] hover:text-black dark:hover:text-white hover:bg-[#F2F2EC] dark:hover:bg-[#222222] transition-colors cursor-pointer"
@@ -273,10 +263,7 @@ export default function AIAssistant({ isOpen, onClose, bottomOffset = 24 }) {
           </div>
         </div>
 
-        {/* Chat Messages / Suggested Questions Body */}
         <div className="flex-1 px-3.5 sm:px-5 py-3 sm:py-4 overflow-y-auto bg-white dark:bg-[#141414] space-y-3 sm:space-y-3.5">
-          
-          {/* Welcome Card */}
           <div className="p-4 rounded-2xl bg-[#F7F7F5] dark:bg-[#1C1C1C] border border-transparent space-y-1.5">
             <p className="text-xs text-[#333333] dark:text-[#EDEDED] leading-relaxed font-semibold">
               👋 Hi! I'm Nini, Jenny's AI assistant.
@@ -286,12 +273,10 @@ export default function AIAssistant({ isOpen, onClose, bottomOffset = 24 }) {
             </p>
           </div>
 
-          {/* Suggested Questions List (Shown if no messages or at start) */}
           {messages.length === 0 && (
             <>
               <SuggestedQuestions onSelectQuestion={handleSendMessage} />
 
-              {/* Divider: or ask anything */}
               <div className="relative flex items-center justify-center my-3">
                 <div className="border-t border-[#EDEDE8] dark:border-[#262626] w-full" />
                 <span className="bg-white dark:bg-[#141414] px-3 text-[11px] text-[#999999] dark:text-[#666666] absolute font-medium">
@@ -301,7 +286,6 @@ export default function AIAssistant({ isOpen, onClose, bottomOffset = 24 }) {
             </>
           )}
 
-          {/* Conversation Messages */}
           {messages.map((msg, index) => (
             <ChatMessage
               key={index}
@@ -312,13 +296,11 @@ export default function AIAssistant({ isOpen, onClose, bottomOffset = 24 }) {
             />
           ))}
 
-          {/* AI Status Loader */}
           {status && <AIStatus status={status} />}
 
           <div ref={messagesEndRef} />
         </div>
 
-        {/* Footer Area: Clean Input */}
         <div className="p-3 sm:p-3.5 bg-white dark:bg-[#141414] border-t border-[#F0F0EB] dark:border-[#222222]">
           <ChatInput 
             onSendMessage={handleSendMessage} 

@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 
 const sections = [
   { id: 'home', label: 'Home' },
-  { id: 'about', label: 'About' },
   { id: 'projects', label: 'Projects' },
-  { id: 'skills', label: 'Skills' },
   { id: 'certifications', label: 'Certifications' },
+  { id: 'skills', label: 'Tech Stack' },
+  { id: 'about', label: 'About Me' },
   { id: 'contact', label: 'Contact' },
 ];
 
@@ -29,7 +29,7 @@ export default function SideDots() {
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll(); // initialize
+    handleScroll();
 
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -55,10 +55,8 @@ export default function SideDots() {
             aria-label={`Scroll to ${section.label}`}
             className="group relative flex items-center justify-center w-5 h-5 sm:w-6 sm:h-6 focus:outline-none focus-visible:ring-1 focus-visible:ring-black dark:focus-visible:ring-white rounded-full transition-all duration-200"
           >
-            {/* Hover Background Highlight (Contained inside the rail) */}
             <span className="absolute inset-0 rounded-full bg-neutral-200/50 dark:bg-neutral-800/50 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none" />
 
-            {/* Section Indicator Dot / Pill */}
             <span
               className={`block rounded-full transition-all duration-300 ease-out ${
                 isActive
@@ -67,7 +65,6 @@ export default function SideDots() {
               }`}
             />
 
-            {/* Floating Tooltip Label */}
             <span className="absolute left-full ml-2.5 top-1/2 -translate-y-1/2 text-[10px] sm:text-xs font-semibold tracking-wide text-[#111111] dark:text-white opacity-0 group-hover:opacity-100 translate-x-[-4px] group-hover:translate-x-0 transition-all duration-200 ease-out pointer-events-none whitespace-nowrap z-40 bg-white/95 dark:bg-[#181818]/95 px-2.5 py-1 rounded-full border border-[#E8E8E3] dark:border-[#2C2C2C] shadow-md backdrop-blur-md">
               {section.label}
             </span>
