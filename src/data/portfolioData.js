@@ -92,6 +92,18 @@ export const portfolioData = {
       featured: true
     },
     {
+      id: "kusa",
+      title: "KUSA — Automatic Form Filler",
+      description: "Local-first Chrome extension that saves reusable profile information and fills web forms securely with heuristic matching, automatic age calculation, and sensitive field protection.",
+      technologies: ["JavaScript", "Chrome Extension API", "HTML5", "CSS3", "Node.js"],
+      image: "/projects_thumbnail/KUSA.png",
+      githubUrl: "https://github.com/Nej2005/KUSA",
+      githubAccount: "Personal GitHub",
+      accountType: "personal",
+      demoUrl: null,
+      featured: true
+    },
+    {
       id: "plp-examguard",
       title: "PLP ExamGuard — Capstone Project",
       description: "Secure online examination platform designed to monitor suspicious student activities, record violations, and maintain audit trails during digital assessments.",
@@ -137,7 +149,7 @@ export const portfolioData = {
       {
         name: "JavaScript",
         logo: "javascript",
-        usedIn: "Personal Developer Portfolio, Barbeque ni Bebang, PLP Lost and Found System, SVMS System"
+        usedIn: "Personal Developer Portfolio, Barbeque ni Bebang, KUSA — Automatic Form Filler, PLP Lost and Found System, SVMS System"
       },
       {
         name: "TypeScript",
@@ -152,7 +164,7 @@ export const portfolioData = {
       {
         name: "Node.js",
         logo: "nodejs",
-        usedIn: "PLP ExamGuard, PLP Lost and Found System, SVMS System"
+        usedIn: "KUSA — Automatic Form Filler, PLP ExamGuard, PLP Lost and Found System, SVMS System"
       },
       {
         name: "Next.js",
@@ -167,12 +179,12 @@ export const portfolioData = {
       {
         name: "HTML5",
         logo: "html5",
-        usedIn: "Personal Portfolio, Barbeque ni Bebang, Academic Projects"
+        usedIn: "Personal Portfolio, Barbeque ni Bebang, KUSA — Automatic Form Filler, Academic Projects"
       },
       {
         name: "CSS3",
         logo: "css3",
-        usedIn: "Personal Portfolio, Barbeque ni Bebang, Academic Projects"
+        usedIn: "Personal Portfolio, Barbeque ni Bebang, KUSA — Automatic Form Filler, Academic Projects"
       },
       {
         name: "Tailwind CSS",

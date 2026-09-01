@@ -24,9 +24,9 @@ export default function Projects() {
           </div>
         </ScrollReveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 items-stretch">
           {portfolioData.projects.map((project, index) => (
-            <ScrollReveal key={project.id} animation="fade-up" delay={index * 120}>
+            <ScrollReveal key={project.id} animation="fade-up" delay={index * 120} className="h-full flex flex-col">
               <ProjectCard project={project} index={index + 1} />
             </ScrollReveal>
           ))}

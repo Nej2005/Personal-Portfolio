@@ -10,9 +10,9 @@ export default function ProjectCard({ project, index = 1 }) {
       maxTilt={12}
       scale={1.035}
       glare={true}
-      className="card-minimal flex flex-col overflow-hidden group bg-white dark:bg-[#141414]"
+      className="card-minimal flex flex-col overflow-hidden group bg-white dark:bg-[#141414] h-full min-h-[440px] sm:min-h-[480px]"
     >
-      <div className="relative w-full h-32 sm:h-40 bg-[#F7F7F5] dark:bg-[#181818] border-b border-[#E8E8E3] dark:border-[#262626] flex items-center justify-between px-5 sm:px-7 overflow-hidden transition-colors">
+      <div className="relative w-full h-32 sm:h-40 bg-[#F7F7F5] dark:bg-[#181818] border-b border-[#E8E8E3] dark:border-[#262626] flex items-center justify-between px-5 sm:px-7 overflow-hidden transition-colors shrink-0">
         {project.image && (
           <>
             <img
@@ -48,7 +48,7 @@ export default function ProjectCard({ project, index = 1 }) {
       </div>
 
       <div className="p-4 sm:p-6 flex-1 flex flex-col justify-between" style={{ transform: 'translateZ(10px)' }}>
-        <div>
+        <div className="flex-1 flex flex-col">
           <h3 className="text-base sm:text-lg font-bold text-[#111111] dark:text-white group-hover:text-black dark:group-hover:text-white tracking-tight leading-snug transition-colors">
             {project.title}
           </h3>
@@ -65,7 +65,7 @@ export default function ProjectCard({ project, index = 1 }) {
         </div>
 
         <div className="pt-4 sm:pt-5 mt-auto">
-          <div className="flex flex-wrap gap-1.5 mb-3.5 sm:mb-4">
+          <div className="flex flex-wrap gap-1.5 mb-3.5 sm:mb-4 min-h-[56px] sm:min-h-[64px] content-start">
             {project.technologies.map((tech, idx) => (
               <span key={idx} className="tag-pill group-hover:bg-[#EAEAEA] dark:group-hover:bg-[#282828] transition-colors">
                 {tech}
