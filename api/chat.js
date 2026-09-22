@@ -76,6 +76,9 @@ export default async function handler(req, res) {
     if (lower.includes('certification') || lower.includes('alibaba') || lower.includes('packetworx')) {
       navLinks.push({ label: 'View Certifications', target: '#certifications' });
     }
+    if (lower.includes('careercat') || lower.includes('experience') || lower.includes('junior software developer')) {
+      navLinks.push({ label: 'View Experience', target: '#experience' });
+    }
 
     return res.status(200).json({
       reply: replyText,

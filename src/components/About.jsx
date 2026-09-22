@@ -6,7 +6,7 @@ import ScrollReveal from './ScrollReveal';
 
 export default function About() {
   return (
-    <section id="about" className="py-16 sm:py-20 md:py-28 bg-[#F7F7F3] dark:bg-[#121212] border-y border-[#E8E8E3] dark:border-[#242424] transition-colors duration-300">
+    <section id="about" className="py-16 sm:py-20 md:py-28 bg-white dark:bg-[#0D0D0D] transition-colors duration-300">
       <div className="section-container">
         
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-10">

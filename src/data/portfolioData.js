@@ -144,6 +144,36 @@ export const portfolioData = {
     }
   ],
 
+  experience: [
+    {
+      id: "careercat-junior-developer",
+      role: "Junior Software Developer",
+      company: "CareerCat",
+      companyInitials: "CC",
+      initials: "CC",
+      employmentType: "Contract",
+      period: "September 2026 – Present",
+      location: "Remote",
+      summary: "Developing browser helper scripts and userscripts to automate live employer application form filling, workflow pipelines, and database management.",
+      highlights: [
+        "Browser helper userscripts & live employer form autofill",
+        "Automation workflows in NocoBase & low-code systems",
+        "Node.js automation scripts and data tools",
+        "PostgreSQL querying, cleaning, and data maintenance",
+        "Dynamic site selector rules & database configurations",
+        "In-browser real-user testing & diagnostics"
+      ],
+      technologies: [
+        "Node.js",
+        "Userscripts",
+        "Browser Automation",
+        "PostgreSQL",
+        "NocoBase",
+        "JavaScript"
+      ]
+    }
+  ],
+
   skills: {
     programmingLanguages: [
       {
@@ -233,7 +263,7 @@ export const portfolioData = {
         category: "Design & Diagramming"
       },
       {
-        name: "ChatGPT, Codex & Antigravity (Gemini/Claude models)",
+        name: "Codex, Claude Code, Gemini",
         usedIn: "AI-assisted engineering, prompt workflows & model integrations",
         icon: "Sparkles",
         category: "AI & LLM Tools"
@@ -359,11 +389,11 @@ export const portfolioData = {
   ],
 
   suggestedQuestions: [
+    "Tell me about her work experience.",
+    "What is her role at CareerCat?",
     "What projects has she built?",
     "What technologies does she know?",
     "Tell me about her best project.",
-    "What skills did she use in her projects?",
-    "What certifications does she have?",
-    "What is she currently learning?"
+    "What certifications does she have?"
   ]
 };

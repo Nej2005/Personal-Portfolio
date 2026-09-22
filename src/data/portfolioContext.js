@@ -46,6 +46,14 @@ ${portfolioData.projects.map(p => `Project: ${p.title}
   GitHub: ${p.githubUrl}
 `).join('\n')}
 
+PROFESSIONAL EXPERIENCE:
+${portfolioData.experience ? portfolioData.experience.map(exp => `Role: ${exp.role} at ${exp.company} (${exp.period}, ${exp.employmentType}, ${exp.location})
+  Summary: ${exp.summary}
+  Key Focus Areas:
+  ${exp.highlights.map(h => `  - ${h}`).join('\n')}
+  Technologies: ${exp.technologies.join(', ')}
+`).join('\n') : ''}
+
 PROGRAMMING LANGUAGES:
 ${portfolioData.skills.programmingLanguages.map(s => `- ${s.name} (USED IN: ${s.usedIn})`).join('\n')}
 

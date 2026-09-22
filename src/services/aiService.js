@@ -35,6 +35,9 @@ function getOfflineFallbackResponse(prompt) {
   if (p.includes('who are you') || p.includes('your name') || p.includes('nini')) {
     return "Hi! I'm **Nini**, Jenny's AI portfolio assistant. I can help you learn all about her projects, backend development skills, academic achievements, and certifications.";
   }
+  if (p.includes('experience') || p.includes('careercat') || p.includes('job') || p.includes('company') || p.includes('role')) {
+    return "Jenny is currently working as a **Junior Software Developer (Contract)** at **CareerCat** (September 2026 – Present).\n\nCareerCat is an automated job-application platform that helps candidates discover opportunities and automatically completes live employer application forms in real browsers. Jenny focuses on:\n- Developing browser helper extensions and userscripts for live employer form autofilling\n- Building and maintaining automation workflows in NocoBase\n- Writing Node.js tools and scripts\n- Managing and querying data in PostgreSQL\n- Conducting live in-browser testing and dynamic selector configurations.";
+  }
   if (p.includes('project') || p.includes('built') || p.includes('work') || p.includes('system')) {
     return "Jenny has developed several practical systems:\n\n1. **Student Examination Management System** (React, Node.js, MySQL) — An automated web platform for administering and evaluating student exams.\n2. **IT Helpdesk System** (React, Laravel, MySQL) — A ticketing platform for logging and dispatching hardware/software support.\n3. **E-Commerce Website** (HTML/CSS, JavaScript, PHP, MySQL) — A dynamic shopping portal with cart and checkout workflows.\n4. **AI Portfolio Assistant** — An interactive assistant powered by Gemini API.";
   }

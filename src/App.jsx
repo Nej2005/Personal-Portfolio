@@ -4,6 +4,7 @@ import ThemeToggle from './components/ThemeToggle';
 import Hero from './components/Hero';
 import About from './components/About';
 import Projects from './components/Projects';
+import Experience from './components/Experience';
 import Skills from './components/Skills';
 import Certifications from './components/Certifications';
 import Contact from './components/Contact';
@@ -76,8 +77,9 @@ export default function App() {
       <main className="flex-1">
         <Hero onOpenResume={() => setIsResumeOpen(true)} />
         <Projects />
-        <Certifications />
+        <Experience />
         <Skills />
+        <Certifications />
         <About />
         <Contact onOpenResume={() => setIsResumeOpen(true)} />
       </main>

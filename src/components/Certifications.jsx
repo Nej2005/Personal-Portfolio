@@ -8,7 +8,7 @@ export default function Certifications() {
   const [selectedCert, setSelectedCert] = useState(null);
 
   return (
-    <section id="certifications" className="py-16 sm:py-20 md:py-32 bg-white dark:bg-[#0D0D0D] transition-colors duration-300">
+    <section id="certifications" className="py-16 sm:py-20 md:py-32 bg-[#F7F7F3] dark:bg-[#121212] border-y border-[#E8E8E3] dark:border-[#242424] transition-colors duration-300">
       <div className="section-container">
         
         <ScrollReveal animation="fade-up" delay={0}>

@@ -58,12 +58,12 @@ export default function Skills() {
     { name: "Git & GitHub", icon: "GitBranch", category: "Version Control" },
     { name: "MySQL & Supabase", icon: "Database", category: "Database Systems" },
     { name: "Figma, Canva, & Draw.io", icon: "Layout", category: "Design & Diagramming" },
-    { name: "ChatGPT, Codex & Antigravity (Gemini/Claude models)", icon: "Sparkles", category: "AI & LLM Tools" },
+    { name: "Codex, Claude Code, Gemini", icon: "Sparkles", category: "AI & LLM Tools" },
     { name: "Notion & Discord", icon: "FolderKanban", category: "Productivity" },
   ];
 
   return (
-    <section id="skills" className="py-16 sm:py-20 md:py-28 bg-[#F7F7F3] dark:bg-[#121212] border-y border-[#E8E8E3] dark:border-[#242424] transition-colors duration-300">
+    <section id="skills" className="py-16 sm:py-20 md:py-28 bg-white dark:bg-[#0D0D0D] transition-colors duration-300">
       <div className="section-container">
         
         <ScrollReveal animation="fade-up" delay={0}>
@@ -82,7 +82,7 @@ export default function Skills() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 items-start">
           
           <ScrollReveal animation="slide-right" delay={150}>
-            <div className="card-minimal p-5 sm:p-7 bg-white dark:bg-[#141414]">
+            <div className="card-minimal p-5 sm:p-7 bg-[#FAFAF7] dark:bg-[#141414]">
               <div className="border-b border-[#E8E8E3] dark:border-[#262626] pb-3 mb-4 flex items-center justify-between">
                 <h3 className="text-xs font-bold tracking-wider text-[#6B6B6B] dark:text-[#999999] uppercase">
                   PROGRAMMING LANGUAGES
@@ -121,7 +121,7 @@ export default function Skills() {
           </ScrollReveal>
 
           <ScrollReveal animation="slide-left" delay={300}>
-            <div className="card-minimal p-5 sm:p-7 bg-white dark:bg-[#141414]">
+            <div className="card-minimal p-5 sm:p-7 bg-[#FAFAF7] dark:bg-[#141414]">
               <div className="border-b border-[#E8E8E3] dark:border-[#262626] pb-3 mb-4 flex items-center justify-between">
                 <h3 className="text-xs font-bold tracking-wider text-[#6B6B6B] dark:text-[#999999] uppercase">
                   DEVELOPER TOOLS

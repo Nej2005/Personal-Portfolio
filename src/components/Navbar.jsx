@@ -17,8 +17,9 @@ export default function Navbar({ onOpenAI, onOpenResume }) {
   const navLinks = [
     { name: 'Home', href: '#home' },
     { name: 'Projects', href: '#projects' },
-    { name: 'Certifications', href: '#certifications' },
+    { name: 'Experience', href: '#experience' },
     { name: 'Tech Stack', href: '#skills' },
+    { name: 'Certifications', href: '#certifications' },
     { name: 'About Me', href: '#about' },
     { name: 'Contact', href: '#contact' },
   ];
