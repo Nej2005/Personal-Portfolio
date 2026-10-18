@@ -1,29 +1,41 @@
-import React, { useEffect, useState } from 'react';
-import { ArrowLeft, Download, Loader2, FileText } from 'lucide-react';
+import React, { useEffect, useRef, useState } from 'react';
+import { ArrowLeft, Download, FileText } from 'lucide-react';
 import { portfolioData } from '../data/portfolioData';
+import ResumeLoader from './ResumeLoader';
+
+const ENTER_DURATION = 1100;
+const EXIT_DURATION = 1000;
+const REVEAL_DURATION = 300;
 
 export default function ResumeModal({ isOpen, onClose }) {
   const [stage, setStage] = useState('closed');
+  const timers = useRef([]);
+
+  const clearTimers = () => {
+    timers.current.forEach(clearTimeout);
+    timers.current = [];
+  };
 
   useEffect(() => {
+    clearTimers();
     if (isOpen) {
       setStage('entering');
       document.body.style.overflow = 'hidden';
 
-      const timer = setTimeout(() => {
-        setStage('viewing');
-      }, 650);
-
-      return () => clearTimeout(timer);
+      timers.current = [
+        setTimeout(() => setStage('revealing'), ENTER_DURATION),
+        setTimeout(() => setStage('viewing'), ENTER_DURATION + REVEAL_DURATION),
+      ];
     } else {
       setStage('closed');
       document.body.style.overflow = '';
     }
+    return clearTimers;
   }, [isOpen]);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (e.key === 'Escape' && (stage === 'viewing' || stage === 'entering')) {
+      if (e.key === 'Escape' && stage !== 'exiting' && stage !== 'closed') {
         handleBackToPortfolio();
       }
     };
@@ -33,35 +45,26 @@ export default function ResumeModal({ isOpen, onClose }) {
 
   const handleBackToPortfolio = () => {
     if (stage === 'exiting') return;
+    clearTimers();
     setStage('exiting');
-    
-    setTimeout(() => {
-      onClose();
-      setStage('closed');
-      document.body.style.overflow = '';
-    }, 600);
+
+    timers.current = [
+      setTimeout(() => {
+        onClose();
+        setStage('closed');
+        document.body.style.overflow = '';
+      }, EXIT_DURATION),
+    ];
   };
 
   if (stage === 'closed') return null;
 
   return (
     <div className="fixed inset-0 z-50 w-screen h-screen bg-[#F5F5F0] dark:bg-[#0D0D0D] flex flex-col text-[#111111] dark:text-white selection:bg-neutral-200 dark:selection:bg-neutral-800 transition-colors duration-300 overflow-hidden">
-      {(stage === 'entering' || stage === 'exiting') && (
-        <div className="fixed inset-0 z-50 bg-[#F5F5F0] dark:bg-[#0D0D0D] flex flex-col items-center justify-center space-y-4 animate-fadeIn transition-colors duration-300">
-          <div className="w-16 h-16 rounded-full bg-[#111111] dark:bg-white text-white dark:text-[#111111] font-extrabold text-xl flex items-center justify-center shadow-2xl animate-pulse">
-            {portfolioData.personal.initials}
-          </div>
-
-          <div className="flex items-center gap-2 text-xs sm:text-sm font-semibold tracking-widest uppercase text-[#555555] dark:text-neutral-300">
-            <Loader2 className="w-4 h-4 animate-spin text-[#111111] dark:text-white" />
-            <span>{stage === 'entering' ? 'Opening Resume...' : 'Returning to Portfolio...'}</span>
-          </div>
-
-          <div className="w-48 h-1 bg-[#D8D8D0] dark:bg-neutral-800 rounded-full overflow-hidden">
-            <div className="w-full h-full bg-[#111111] dark:bg-white animate-pulse" />
-          </div>
-        </div>
+      {(stage === 'entering' || stage === 'revealing') && (
+        <ResumeLoader mode="entering" duration={ENTER_DURATION} leaving={stage === 'revealing'} />
       )}
+      {stage === 'exiting' && <ResumeLoader mode="exiting" duration={EXIT_DURATION} />}
 
       <header className="px-4 sm:px-8 py-3 bg-[#FFFFFF] dark:bg-[#141414] border-b border-[#E2E2DC] dark:border-[#242424] flex items-center justify-between gap-4 z-40 shadow-xs transition-colors duration-300">
         <button

@@ -39,6 +39,18 @@ export const portfolioData = {
     paragraph: "I'm a 21-year-old 4th-year BSIT student at Pamantasan ng Lungsod ng Pasig, working toward becoming a back-end developer. Alongside maintaining strong academic standing, I'm passionate about exploring new tools, building functional systems, and continuously leveling up my technical skills.",
     achievements: [
       {
+        title: "3rd Place – Best Paper, Cluster 2",
+        subtitle: "4th Regional Student Research Colloquium | TUKLAS",
+        date: "Oct 2026",
+        icon: "Trophy"
+      },
+      {
+        title: "2nd Place – Best Presenter, Cluster 2 (Team Award)",
+        subtitle: "4th Regional Student Research Colloquium | TUKLAS",
+        date: "Oct 2026",
+        icon: "Medal"
+      },
+      {
         title: "President's Lister",
         subtitle: "College of Computer Studies",
         date: "2023 – Present",
@@ -104,11 +116,11 @@ export const portfolioData = {
       featured: true
     },
     {
-      id: "plp-examguard",
-      title: "PLP ExamGuard — Capstone Project",
-      description: "Secure online examination platform designed to monitor suspicious student activities, record violations, and maintain audit trails during digital assessments.",
+      id: "tuklas",
+      title: "TUKLAS — AI-Powered Examination System",
+      description: "AI-powered examination system integrating automated test generation, real-time browser and webcam proctoring, and Random Forest-based prediction of academic dishonesty.",
       role: "Back-end",
-      technologies: ["Next.js", "React", "TypeScript", "Node.js", "Supabase", "Tailwind CSS"],
+      technologies: ["Next.js", "React", "TypeScript", "Node.js", "Python", "Groq AI", "Random Forest"],
       image: null,
       githubUrl: "https://github.com/JohnDanielCabusas/plp-examguard",
       githubAccount: "School GitHub",
@@ -184,22 +196,22 @@ export const portfolioData = {
       {
         name: "TypeScript",
         logo: "typescript",
-        usedIn: "Barbeque ni Bebang, PLP ExamGuard Capstone Project"
+        usedIn: "Barbeque ni Bebang, TUKLAS"
       },
       {
         name: "React",
         logo: "react",
-        usedIn: "Personal Developer Portfolio, Barbeque ni Bebang, PLP ExamGuard, SVMS System"
+        usedIn: "Personal Developer Portfolio, Barbeque ni Bebang, TUKLAS, SVMS System"
       },
       {
         name: "Node.js",
         logo: "nodejs",
-        usedIn: "KUSA — Automatic Form Filler, PLP ExamGuard, PLP Lost and Found System, SVMS System"
+        usedIn: "KUSA — Automatic Form Filler, TUKLAS, PLP Lost and Found System, SVMS System"
       },
       {
         name: "Next.js",
         logo: "nextjs",
-        usedIn: "PLP ExamGuard Capstone Project"
+        usedIn: "TUKLAS"
       },
       {
         name: "Express.js",
@@ -219,12 +231,12 @@ export const portfolioData = {
       {
         name: "Tailwind CSS",
         logo: "tailwindcss",
-        usedIn: "Personal Portfolio, Barbeque ni Bebang, PLP ExamGuard, SVMS System"
+        usedIn: "Personal Portfolio, Barbeque ni Bebang, SVMS System"
       },
       {
         name: "PostgreSQL",
         logo: "postgresql",
-        usedIn: "PLP ExamGuard, PLP Lost and Found System, SVMS System"
+        usedIn: "PLP Lost and Found System, SVMS System"
       },
       {
         name: "PHP",
