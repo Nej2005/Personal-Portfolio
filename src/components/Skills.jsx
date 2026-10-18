@@ -51,6 +51,7 @@ export default function Skills() {
     { name: "PostgreSQL", logo: "postgresql" },
     { name: "PHP", logo: "php" },
     { name: "Java", logo: "java" },
+    { name: "Python", logo: "python" },
   ];
 
   const developerTools = [

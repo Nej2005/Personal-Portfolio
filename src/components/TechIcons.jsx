@@ -90,5 +90,13 @@ export const techSvgMap = {
       <path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V8z" />
       <path d="M6 2c.5 1.5-1 2.5 0 4M10 2c.5 1.5-1 2.5 0 4M14 2c.5 1.5-1 2.5 0 4" />
     </svg>
+  ),
+  python: (props) => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <path d="M12 9H5a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h3" />
+      <path d="M12 15h7a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3" />
+      <path d="M8 9V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2v-4" />
+      <path d="M11 6v.01M13 18v.01" />
+    </svg>
   )
 };

@@ -247,6 +247,11 @@ export const portfolioData = {
         name: "Java",
         logo: "java",
         usedIn: "Academic Coursework & Object-Oriented Systems"
+      },
+      {
+        name: "Python",
+        logo: "python",
+        usedIn: "TUKLAS"
       }
     ],
     developerTools: [
