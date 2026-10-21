@@ -5,7 +5,7 @@
 ## 🚀 Features
 
 - **Interactive AI Assistant ("Nini")**: Powered by the `@google/genai` SDK to answer visitor inquiries about projects, skills, education, and credentials in real-time.
-- **Featured Projects Showcase**: Categorized list of web systems, database architectures, and capstone applications with links to personal and academic GitHub repositories.
+- **Featured Projects Showcase**: Categorized list of web systems, desktop apps, browser extensions, and capstone applications with links to personal and academic GitHub repositories.
 - **Credentials & Certifications**: Interactive modal preview for verified certificates, workshops, and achievements.
 - **Contact Form & Dual GitHub Profiles**: Integrated communication options with separate profiles for personal and university projects.
 

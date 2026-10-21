@@ -1,6 +1,7 @@
 import { GoogleGenAI } from '@google/genai';
 import { portfolioContextPrompt } from '../src/data/portfolioContext.js';
 import { portfolioData } from '../src/data/portfolioData.js';
+import { projectNavLinks } from '../src/data/projectSummary.js';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -62,17 +63,8 @@ export default async function handler(req, res) {
     const replyText = response.text || "No response received.";
 
     // Context navigation action buttons
-    const navLinks = [];
+    const navLinks = projectNavLinks(replyText);
     const lower = replyText.toLowerCase();
-    if (lower.includes('student examination') || lower.includes('student portal') || lower.includes('examination management')) {
-      navLinks.push({ label: 'View Student Portal', target: '#projects' });
-    }
-    if (lower.includes('helpdesk') || lower.includes('it support')) {
-      navLinks.push({ label: 'View IT Helpdesk', target: '#projects' });
-    }
-    if (lower.includes('e-commerce') || lower.includes('online store')) {
-      navLinks.push({ label: 'View E-Commerce Website', target: '#projects' });
-    }
     if (lower.includes('certification') || lower.includes('alibaba') || lower.includes('packetworx')) {
       navLinks.push({ label: 'View Certifications', target: '#certifications' });
     }

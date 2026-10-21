@@ -112,6 +112,7 @@ export const portfolioData = {
       githubUrl: "https://github.com/Nej2005/KUSA",
       githubAccount: "Personal GitHub",
       accountType: "personal",
+      category: "Browser Extension",
       demoUrl: null,
       featured: true
     },

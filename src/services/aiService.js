@@ -1,3 +1,5 @@
+import { projectListMarkdown } from '../data/projectSummary';
+
 export async function sendChatMessage(messages, activeQuestion) {
   try {
     const res = await fetch('/api/chat', {
@@ -39,7 +41,7 @@ function getOfflineFallbackResponse(prompt) {
     return "Jenny is currently working as a **Junior Software Developer (Contract)** at **CareerCat** (September 2026 – Present).\n\nCareerCat is an automated job-application platform that helps candidates discover opportunities and automatically completes live employer application forms in real browsers. Jenny focuses on:\n- Developing browser helper extensions and userscripts for live employer form autofilling\n- Building and maintaining automation workflows in NocoBase\n- Writing Node.js tools and scripts\n- Managing and querying data in PostgreSQL\n- Conducting live in-browser testing and dynamic selector configurations.";
   }
   if (p.includes('project') || p.includes('built') || p.includes('work') || p.includes('system')) {
-    return "Jenny has developed several practical systems:\n\n1. **Student Examination Management System** (React, Node.js, MySQL) — An automated web platform for administering and evaluating student exams.\n2. **IT Helpdesk System** (React, Laravel, MySQL) — A ticketing platform for logging and dispatching hardware/software support.\n3. **E-Commerce Website** (HTML/CSS, JavaScript, PHP, MySQL) — A dynamic shopping portal with cart and checkout workflows.\n4. **AI Portfolio Assistant** — An interactive assistant powered by Gemini API.";
+    return `Jenny has built these projects:\n\n${projectListMarkdown()}`;
   }
   if (p.includes('technology') || p.includes('skill') || p.includes('language') || p.includes('tool')) {
     return "Jenny specializes in backend development and full-stack technologies:\n\n- **Programming Languages**: JavaScript, PHP, Java, SQL, Python, C#\n- **Developer Tools**: VS Code, Git & GitHub, MySQL, Figma, Postman, Docker\n\nShe focuses on writing clean, maintainable code and solving real-world challenges.";

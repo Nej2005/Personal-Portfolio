@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react';
 import { GoogleGenAI } from '@google/genai';
 import { portfolioContextPrompt } from './src/data/portfolioContext.js';
 import { portfolioData } from './src/data/portfolioData.js';
+import { joinNames, projectListMarkdown, projectNames, projectNavLinks } from './src/data/projectSummary.js';
 
 // Custom Vite plugin for secure local server-side API handling
 function serverlessApiPlugin(env) {
@@ -26,7 +27,7 @@ function serverlessApiPlugin(env) {
                 // Return helpful grounded response if API key is not configured
                 res.setHeader('Content-Type', 'application/json');
                 res.end(JSON.stringify({
-                  reply: `Hi! I'm Nini, ${portfolioData.personal.name}'s AI Assistant.\n\nI can tell you all about Jenny's projects like the **Student Examination Management System**, **IT Helpdesk System**, and **E-Commerce Website**, technical skills in React, JavaScript, PHP, MySQL, or certifications from Alibaba Cloud & Packetworx!`,
+                  reply: `Hi! I'm Nini, ${portfolioData.personal.name}'s AI Assistant.\n\nI can tell you all about Jenny's projects like ${joinNames(projectNames().filter(n => !/portfolio/i.test(n)).slice(0, 3).map(n => `**${n}**`))}, technical skills in React, JavaScript, PHP, MySQL, or certifications from Alibaba Cloud & Packetworx!`,
                   model: 'nini-local',
                   navLinks: [
                     { label: 'View Projects', target: '#projects' },
@@ -94,7 +95,7 @@ function serverlessApiPlugin(env) {
               if (!replyText) {
                 const p = (userPrompt || '').toLowerCase();
                 if (p.includes('project') || p.includes('built') || p.includes('system')) {
-                  replyText = "Jenny has built several practical systems:\n\n1. **Student Examination Management System** (React, Node.js, MySQL) — An automated web platform for administering and evaluating student exams.\n2. **IT Helpdesk System** (React, Laravel, MySQL) — A ticketing platform for logging and dispatching hardware/software support.\n3. **E-Commerce Website** (HTML/CSS, JavaScript, PHP, MySQL) — A dynamic shopping portal with cart and checkout workflows.\n4. **AI Portfolio Assistant** — An interactive assistant powered by Gemini API.";
+                  replyText = `Jenny has built these projects:\n\n${projectListMarkdown()}`;
                 } else if (p.includes('github') || p.includes('git') || p.includes('repo')) {
                   replyText = "Jenny maintains two active GitHub profiles:\n\n- **Personal GitHub** (@Nej2005): Personal builds & capstone systems.\n- **School / Academic GitHub** (@jennyH25): Coursework and university projects.\n\nYou can access both from the Hero section or Contact links below!";
                 } else if (p.includes('contact') || p.includes('phone') || p.includes('email') || p.includes('hire')) {
@@ -108,19 +109,13 @@ function serverlessApiPlugin(env) {
               }
 
               // Detect project navigation triggers
-              const navLinks = [];
+              const navLinks = projectNavLinks(replyText);
               const lower = replyText.toLowerCase();
-              if (lower.includes('student examination') || lower.includes('student portal') || lower.includes('examination management')) {
-                navLinks.push({ label: 'View Student Portal', target: '#projects' });
-              }
-              if (lower.includes('helpdesk') || lower.includes('it support')) {
-                navLinks.push({ label: 'View IT Helpdesk', target: '#projects' });
-              }
-              if (lower.includes('e-commerce') || lower.includes('online store')) {
-                navLinks.push({ label: 'View E-Commerce Website', target: '#projects' });
-              }
               if (lower.includes('certification') || lower.includes('alibaba') || lower.includes('packetworx')) {
                 navLinks.push({ label: 'View Certifications', target: '#certifications' });
+              }
+              if (lower.includes('careercat') || lower.includes('experience') || lower.includes('junior software developer')) {
+                navLinks.push({ label: 'View Experience', target: '#experience' });
               }
 
               res.setHeader('Content-Type', 'application/json');
