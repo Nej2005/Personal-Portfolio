@@ -35,7 +35,7 @@ export default function ProjectCard({ project, index = 1 }) {
             {isSchool ? (
               <span className="pixel-chip inline-flex items-center gap-1.5 shadow-2xs group-hover:border-[#111111]/40 dark:group-hover:border-white/40 transition-colors">
                 <GraduationCap className="w-3 h-3 text-[#111111] dark:text-white" />
-                <span>School Project</span>
+                <span>Academic Project</span>
               </span>
             ) : (
               <span className="pixel-chip inline-flex items-center gap-1.5 shadow-2xs group-hover:border-[#111111]/40 dark:group-hover:border-white/40 transition-colors">
@@ -103,7 +103,7 @@ export default function ProjectCard({ project, index = 1 }) {
             </div>
 
             <span className="text-[10px] sm:text-[11px] text-[#999999] dark:text-[#666666] uppercase tracking-wider font-mono">
-              Web System
+              {project.category || 'Web System'}
             </span>
           </div>
         </div>

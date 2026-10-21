@@ -116,6 +116,19 @@ export const portfolioData = {
       featured: true
     },
     {
+      id: "stat-app",
+      title: "STAT! — Drag-and-Drop To-Do Board",
+      description: "Kanban-style desktop to-do app for Windows with separate School, Work, and Personal workspaces, rich-text checklists, due dates, priorities, color-coded cards, and local-first autosave.",
+      technologies: ["Electron", "React", "Vite", "Node.js", "Express", "SQLite"],
+      image: "/projects_thumbnail/STAT.jpg",
+      githubUrl: "https://github.com/Nej2005/stat-app",
+      githubAccount: "Personal GitHub",
+      accountType: "personal",
+      category: "Desktop App",
+      demoUrl: null,
+      featured: true
+    },
+    {
       id: "tuklas",
       title: "TUKLAS — AI-Powered Examination System",
       description: "AI-powered examination system integrating automated test generation, real-time browser and webcam proctoring, and Random Forest-based prediction of academic dishonesty.",
@@ -191,7 +204,7 @@ export const portfolioData = {
       {
         name: "JavaScript",
         logo: "javascript",
-        usedIn: "Personal Developer Portfolio, Barbeque ni Bebang, KUSA — Automatic Form Filler, PLP Lost and Found System, SVMS System"
+        usedIn: "Personal Developer Portfolio, Barbeque ni Bebang, KUSA — Automatic Form Filler, STAT!, PLP Lost and Found System, SVMS System"
       },
       {
         name: "TypeScript",
@@ -201,12 +214,12 @@ export const portfolioData = {
       {
         name: "React",
         logo: "react",
-        usedIn: "Personal Developer Portfolio, Barbeque ni Bebang, TUKLAS, SVMS System"
+        usedIn: "Personal Developer Portfolio, Barbeque ni Bebang, STAT!, TUKLAS, SVMS System"
       },
       {
         name: "Node.js",
         logo: "nodejs",
-        usedIn: "KUSA — Automatic Form Filler, TUKLAS, PLP Lost and Found System, SVMS System"
+        usedIn: "KUSA — Automatic Form Filler, STAT!, TUKLAS, PLP Lost and Found System, SVMS System"
       },
       {
         name: "Next.js",
@@ -216,7 +229,7 @@ export const portfolioData = {
       {
         name: "Express.js",
         logo: "express",
-        usedIn: "PLP Lost and Found System, SVMS System"
+        usedIn: "STAT!, PLP Lost and Found System, SVMS System"
       },
       {
         name: "HTML5",
